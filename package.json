@@ -48,7 +48,7 @@
     "tailwindcss": "^3.4.16",
     "vite": "^6.0.1"
   },
-  "main": "eslint.config.js",
+  "main": "server.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
