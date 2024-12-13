@@ -23,9 +23,9 @@ const DashboardPage = () => {
 
   const [email, setEmail] = useState('');
 
-  useEffect(() => {
-    console.log("Notifications state:", notifications); // Debug log
-  }, [notifications]);
+  // useEffect(() => {
+  //   console.log("Notifications state:", notifications); // Debug log
+  // }, [notifications]);
 
   useEffect(() => {
     // Perform any async initialization or loading when the component mounts
@@ -37,67 +37,67 @@ const DashboardPage = () => {
 
   
 
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
+  // const handleEmailSubmit = (e) => {
+  //   e.preventDefault();
   
-    if (!email) {
-      return alert("Please enter a valid email.");
-    }
+  //   if (!email) {
+  //     return alert("Please enter a valid email.");
+  //   }
   
-    // Save the email to the preferences
-    updatePreferences({ ...preferences, email });
+  //   // Save the email to the preferences
+  //   updatePreferences({ ...preferences, email });
   
-    alert('Email connected successfully!');
-  };
+  //   alert('Email connected successfully!');
+  // };
 
 
-  const handlePreferencesSubmit = async (newPreferences) => {
-    const categoriesMessage = newPreferences.categories.join(", ");
-    const channelsMessage = newPreferences.notificationChannels.join(", ");
-    const message = `Preferences updated: Categories - ${categoriesMessage}, Frequency - ${newPreferences.frequency}, Channels - ${channelsMessage}`;
+  // const handlePreferencesSubmit = async (newPreferences) => {
+  //   const categoriesMessage = newPreferences.categories.join(", ");
+  //   const channelsMessage = newPreferences.notificationChannels.join(", ");
+  //   const message = `Preferences updated: Categories - ${categoriesMessage}, Frequency - ${newPreferences.frequency}, Channels - ${channelsMessage}`;
   
-    addNotification(message, 'success');
-    updatePreferences(newPreferences);
+  //   addNotification(message, 'success');
+  //   updatePreferences(newPreferences);
   
-    try {
+  //   try {
 
-      console.log('Payload to backend:', {
-        message,
-        user: {
-          email: newPreferences.email,
-          phoneNumber: newPreferences.phoneNumber,
-          deviceToken: newPreferences.deviceToken,
-          notificationChannels: newPreferences.notificationChannels,
-        },
-      });
-      // Send the preferences update message to the backend
-      const response = await axios.post('http://localhost:5000/api/notifications/send-notification', {
-        message,
-        user: {
-          email: newPreferences.email,  // Assuming the email is part of newPreferences
-          phoneNumber: newPreferences.phoneNumber,  // Include the phone number if required
-          deviceToken: newPreferences.deviceToken,  // Include device token if needed for push
-          notificationChannels: newPreferences.notificationChannels  // ['email', 'sms', 'push']
-        }
-      });
+  //     console.log('Payload to backend:', {
+  //       message,
+  //       user: {
+  //         email: newPreferences.email,
+  //         phoneNumber: newPreferences.phoneNumber,
+  //         deviceToken: newPreferences.deviceToken,
+  //         notificationChannels: newPreferences.notificationChannels,
+  //       },
+  //     });
+  //     // Send the preferences update message to the backend
+  //     const response = await axios.post('http://localhost:5000/api/notifications/send-notification', {
+  //       message,
+  //       user: {
+  //         email: newPreferences.email,  // Assuming the email is part of newPreferences
+  //         phoneNumber: newPreferences.phoneNumber,  // Include the phone number if required
+  //         deviceToken: newPreferences.deviceToken,  // Include device token if needed for push
+  //         notificationChannels: newPreferences.notificationChannels  // ['email', 'sms', 'push']
+  //       }
+  //     });
   
-      if (response.data.success) {
-        alert('Preferences updated and notification sent!');
-      }
-    } catch (error) {
-      console.error('Error sending notification:', error);
-      alert('Error updating preferences or sending notification.');
-    }
-  };
-  
-
+  //     if (response.data.success) {
+  //       alert('Preferences updated and notification sent!');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error sending notification:', error);
+  //     alert('Error updating preferences or sending notification.');
+  //   }
+  // };
   
 
+  
 
 
-  const handleConnectEmailProvider = () => {
-    connectEmailProvider(); // Example method to connect the email provider
-  };
+
+  // const handleConnectEmailProvider = () => {
+  //   connectEmailProvider(); // Example method to connect the email provider
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -128,7 +128,7 @@ const DashboardPage = () => {
       {/* <NewsAlertForm /> */}
 
     {/* Notification History Section */}
-      <section className="mt-8">
+      {/* <section className="mt-8">
          <h2 className="text-2xl font-semibold mb-4">Notification History</h2>
          <div className="bg-white p-6 shadow-lg rounded-lg">
          {loading ? (
@@ -151,7 +151,7 @@ const DashboardPage = () => {
           )}
         </div>
       </section>
-
+ */}
 
     </div>
   );

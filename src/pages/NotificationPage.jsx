@@ -21,16 +21,18 @@ const NotificationPage = () => {
             No notifications yet. Start by enabling notifications.
           </p>
         ) : (
-          <div className="space-y-4">
-            {notifications.map((notification) => (
-              <NotificationToast
-                key={notification.id}
-                message={notification.message}
-                type={notification.type}
-                duration={5000}
-              />
-            ))}
-          </div>
+
+            <NotificationToast notifications={notifications} />
+        //   <div className="space-y-4">
+        //     {notifications.map((notification) => (
+        //       <NotificationToast
+        //         key={notification.id}
+        //         message={notification.message}
+        //         type={notification.type}
+        //         duration={5000}
+        //       />
+        //     ))}
+        //   </div>
         )}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { useNotificationContext } from "../context/NotificationContext";
 import axios from "axios";
 
 const AlertSettingsForm = () => {
-  const { preferences, updatePreferences, addNotification, notifications, removeNotification } = useNotificationContext();
+  const { preferences, updatePreferences, addNotification } = useNotificationContext();
 
 
   const [formData, setFormData] = useState({
@@ -14,28 +14,30 @@ const AlertSettingsForm = () => {
 
   const [email, setEmail] = useState(preferences?.email || ''); // Initialize email state
 
+  const [successMessage, setSuccessMessage] = useState(''); 
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (notifications.length > 0) {
-        removeNotification(notifications[0].id);
-      }
-    }, 15000);
 
-    return () => clearTimeout(timer);
-  }, [notifications, removeNotification]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (notifications.length > 0) {
+  //       removeNotification(notifications[0].id);
+  //     }
+  //   }, 15000);
 
-  useEffect(() => {
-    console.log('Preferences Loaded:', preferences);
-    if (preferences) {
-      setFormData({
-        categories: preferences.categories || [],
-        frequency: preferences.frequency || "daily",
-        notificationChannels: preferences.notificationChannels || [],
-      });
-      setEmail(preferences.email || ''); 
-    }
-  }, [preferences]);
+  //   return () => clearTimeout(timer);
+  // }, [notifications, removeNotification]);
+
+  // useEffect(() => {
+  //   console.log('Preferences Loaded:', preferences);
+  //   if (preferences) {
+  //     setFormData({
+  //       categories: preferences.categories || [],
+  //       frequency: preferences.frequency || "daily",
+  //       notificationChannels: preferences.notificationChannels || [],
+  //     });
+  //     setEmail(preferences.email || ''); 
+  //   }
+  // }, [preferences]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -91,17 +93,22 @@ const AlertSettingsForm = () => {
           },
         });
 
-      // Send the updated categories to the /subscribe endpoint
-  const response = await axios.post('http://localhost:5000/api/notifications/subscribe', {
+ 
+
+  const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/notifications/subscribe`, {
+  
     email: email,
     categories: formData.categories,
   });
 
+   
   
 
 
         if (response.data.success) {
           console.log('Notification sent successfully:', response.data.message);
+          console.log('Setting success message...');
+          setSuccessMessage('Preferences updated successfully!');
          
         } else {
           console.error('Error in response:', response.data);
@@ -119,20 +126,25 @@ const AlertSettingsForm = () => {
 
 
 
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
+  // const handleEmailSubmit = (e) => {
+  //   e.preventDefault();
   
-    if (!email) {
-      return alert("Please enter a valid email.");
-    }
+  //   if (!email) {
+  //     return alert("Please enter a valid email.");
+  //   }
   
-    // Save the email to the preferences
-    updatePreferences({ ...preferences, email });
+  //   // Save the email to the preferences
+  //   updatePreferences({ ...preferences, email });
   
-    alert('Email connected successfully!');
-  };
+  //   alert('Email connected successfully!');
+  // };
 
-
+  // useEffect(() => {
+  //   if (successMessage) {
+  //     const timer = setTimeout(() => setSuccessMessage(''), 1000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [successMessage]);
   
 
   return (
@@ -224,7 +236,16 @@ const AlertSettingsForm = () => {
       >
         Save Preferences
       </button>
+
+       {/* Success Message */}
+  {successMessage && (
+    <p style={{ color: 'green', background: '#d4f4dd', padding: '10px', borderRadius: '5px', marginTop: '10px' }}>
+      {successMessage}
+    </p>
+  )}
+
     </form>
+
   );
 };
 

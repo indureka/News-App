@@ -22,12 +22,15 @@ const app = express();
 connectDB(); 
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,  
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods if needed
-    credentials: true, 
-  };
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Set your local dev URL or frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+  credentials: true, // Allow credentials if needed
+};
 
   app.use(cors(corsOptions));
+
+
+  app.options('*', cors(corsOptions)); // Preflight requests handler
 
 
 // Middleware to parse incoming JSON requests
