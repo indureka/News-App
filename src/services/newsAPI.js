@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const newsAPIKey = process.env.NEWS_API_KEY; // API Key for news source (e.g., NewsAPI)
+const newsAPIKey = process.env.VITE_NEWS_API_KEY; // API Key for news source (e.g., NewsAPI)
 
 const fetchNews = async (category = "general") => {
   try {
