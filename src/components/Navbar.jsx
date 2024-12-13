@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalStateContext } from "../context/GlobalStateContext";
-import { useNotificationContext } from "../context/NotificationContext";
+
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import notifications from './NotificationToast'
 

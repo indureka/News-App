@@ -4,10 +4,7 @@ import HomePage from './pages/HomePages'
 
 import DashboardPage from './pages/DashboardPage';
 
-import SettingsPage from './Pages/SettingsPage';
 
-import LoginPage from './pages/Auth/LoginPage'
-import SignupPage from './pages/Auth/SignupPage'
 
 import NotFoundPage from './pages/NotFoundPage';
 import NotificationPage from './pages/NotificationPage';

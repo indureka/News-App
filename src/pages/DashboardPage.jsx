@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNotificationContext } from "../context/NotificationContext.jsx";
 import AlertSettingsForm from "../components/AlertSettingsForm.jsx";
-import Loader from "../components/Loader.jsx"; // For displaying loading spinner
-import NotificationToast from '../components/NotificationToast.jsx'
-import EmailProviderSelection from "../components/EmailProviderSelection.jsx";
-import NewsAlertForm from "../components/NewsAlertForm.jsx";
+// import Loader from "../components/Loader.jsx"; // For displaying loading spinner
+// import NotificationToast from '../components/NotificationToast.jsx'
+// import EmailProviderSelection from "../components/EmailProviderSelection.jsx";
+// import NewsAlertForm from "../components/NewsAlertForm.jsx";
 
 
 const DashboardPage = () => {

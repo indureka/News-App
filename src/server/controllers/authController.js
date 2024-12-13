@@ -1,13 +1,13 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-import { generateResetToken } from '../utils/tokenUtils.js';
+// import { generateResetToken } from '../utils/tokenUtils.js';
 
 // import { generateResetToken } from '../utils/tokenUtils.js';  // Function to generate the reset token
 // import { validateEmail, validatePassword, validateNotEmpty } from '../utils/validate.js';
 // import { validateEmail, validatePassword, validateNotEmpty } from '../utils/validate.js';
 // import { PASSWORD_RESET_SUBJECT, FRONTEND_URL } from '../utils/constants.js';
 
-import { ssrExportAllKey } from 'vite/module-runner';
+// import { ssrExportAllKey } from 'vite/module-runner';
 
 import constants from '../utils/constants.js';
 
