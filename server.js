@@ -28,7 +28,7 @@ const app = express();
 connectDB(); 
 
 const corsOptions = {
-  origin: 'https://nimble-puppy-db4fdc.netlify.app/' || process.env.FRONTEND_URL,// Set your local dev URL or frontend URL
+  origin: 'https://676fcaf7c3164c5f26a04c51--nimble-puppy-db4fdc.netlify.app' || process.env.FRONTEND_URL,// Set your local dev URL or frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
   credentials: true, // Allow credentials if needed
 };
