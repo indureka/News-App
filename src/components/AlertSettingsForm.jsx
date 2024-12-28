@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNotificationContext } from "../context/NotificationContext";
+import { useAuthContext } from "../context/AuthContext";
 import axios from "axios";
 
 const AlertSettingsForm = () => {
-  const { preferences, updatePreferences, addNotification } = useNotificationContext();
-
+  const { preferences, updatePreferences, addNotification, setPreferences } = useNotificationContext();
+  const {user, setUser} = useAuthContext();
 
   const [formData, setFormData] = useState({
     categories: preferences?.categories || [],
-    frequency: preferences?.frequency || "daily",
+    frequency: preferences?.frequency || "",
     notificationChannels: preferences?.notificationChannels || [],
   });
 
@@ -16,47 +17,37 @@ const AlertSettingsForm = () => {
 
   const [successMessage, setSuccessMessage] = useState(''); 
 
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     if (notifications.length > 0) {
-  //       removeNotification(notifications[0].id);
-  //     }
-  //   }, 15000);
-
-  //   return () => clearTimeout(timer);
-  // }, [notifications, removeNotification]);
-
-  // useEffect(() => {
-  //   console.log('Preferences Loaded:', preferences);
-  //   if (preferences) {
-  //     setFormData({
-  //       categories: preferences.categories || [],
-  //       frequency: preferences.frequency || "daily",
-  //       notificationChannels: preferences.notificationChannels || [],
-  //     });
-  //     setEmail(preferences.email || ''); 
-  //   }
-  // }, [preferences]);
-
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
-    if (type === "checkbox") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: checked
-          ? [...prevData[name], value]
-          : prevData[name].filter((item) => item !== value),
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+  
+    setFormData((prevData) => {
+      if (name === "notificationChannels") {
+        // Handle notificationChannels as an object
+        return {
+          ...prevData,
+          notificationChannels: {
+            ...prevData.notificationChannels,
+            [value]: checked, // Update the specific notification channel
+          },
+        };
+      } else if (type === "checkbox") {
+        // Handle arrays like categories
+        return {
+          ...prevData,
+          [name]: checked
+            ? [...prevData[name], value] // Add the item if checked
+            : prevData[name].filter((item) => item !== value), // Remove the item if unchecked
+        };
+      } else {
+        // Handle other types of inputs
+        return {
+          ...prevData,
+          [name]: value,
+        };
+      }
+    });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,7 +60,7 @@ const AlertSettingsForm = () => {
     }
 
     if (JSON.stringify(formData.categories) !== JSON.stringify(preferences.categories)) {
-      updatedFields.push('Categories updated');
+      updatedFields.push(`Categories updated to ${formData.categories}`);
     }
 
     if (updatedFields.length > 0) {
@@ -77,9 +68,10 @@ const AlertSettingsForm = () => {
       console.log('Calling addNotification with message:', message);
       addNotification(message, 'success');
 
-      // Include email from the email provider section
-      if (!email) {
-        return alert("Please enter your email to receive notifications.");
+    
+
+      if (!formData.notificationChannels.email) {
+        return alert("Please check the email checkbox to receive notifications.");
       }
 
       // Trigger a backend notification
@@ -87,33 +79,45 @@ const AlertSettingsForm = () => {
         console.log('Sending notification with payload:', {
           message,
           user: {
-            email: email,  // Use the email provided in the email section
+            // email: email,  // Use the email provided in the email section
             notificationChannels: formData.notificationChannels,
             categories: formData.categories,
           },
+          
         });
 
  
 
-  const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/notifications/subscribe`, {
-  
-    email: email,
+
+
+    // const response = await axios.put(`http://localhost:5000/api/preferences/${user.id}`, 
+
+    const response = await axios.put(
+      `${import.meta.env.VITE_BACKEND_URL}/api/preferences/${user.id}`,
+     
+  {
+    notificationChannels: formData.notificationChannels,
     categories: formData.categories,
-  });
+    frequency: formData.frequency,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Attach token in the header
+    }
+  }
+
+);
 
    
-  
+if (response.data.message === "Preferences updated successfully.") {
+  setSuccessMessage('Preferences updated successfully!');
+  setPreferences(response.data.preference); // Update state with new preferences
+} else {
+  console.error('Error in response:', response.data);
+}
 
 
-        if (response.data.success) {
-          console.log('Notification sent successfully:', response.data.message);
-          console.log('Setting success message...');
-          setSuccessMessage('Preferences updated successfully!');
-         
-        } else {
-          console.error('Error in response:', response.data);
-         
-        }
+        // }
       } catch (error) {
         console.error('Error sending notification:', error);
        
@@ -126,25 +130,6 @@ const AlertSettingsForm = () => {
 
 
 
-  // const handleEmailSubmit = (e) => {
-  //   e.preventDefault();
-  
-  //   if (!email) {
-  //     return alert("Please enter a valid email.");
-  //   }
-  
-  //   // Save the email to the preferences
-  //   updatePreferences({ ...preferences, email });
-  
-  //   alert('Email connected successfully!');
-  // };
-
-  // useEffect(() => {
-  //   if (successMessage) {
-  //     const timer = setTimeout(() => setSuccessMessage(''), 1000);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [successMessage]);
   
 
   return (
@@ -186,48 +171,23 @@ const AlertSettingsForm = () => {
       </div>
 
       {/* Notification Channels */}
-      <div>
-        <h3 className="text-lg font-semibold">Select Notification Channels</h3>
-        <div className="flex flex-wrap gap-4">
-          {["email", "sms", "push"].map((channel) => (
-            <label key={channel} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                name="notificationChannels"
-                value={channel}
-                checked={formData.notificationChannels.includes(channel)}
-                onChange={handleChange}
-              />
-              <span>{channel}</span>
-            </label>
-          ))}
-        </div>
-      </div>
 
-      {/* Email Provider Section */}
-<section className="mb-8">
-  <h2 className="text-2xl font-semibold mb-4">Email Provider</h2>
-  <div className="bg-white p-6 shadow-lg rounded-lg">
-    <p className="text-lg mb-4">
-      Enter your email address to receive notifications.
-    </p>
-    {/* <form onSubmit={handleEmailSubmit}> */}
-      <div className="flex flex-col space-y-4">
-        <input
-          type="email"
-          className="p-3 border rounded-md"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        </div>
-        
-{/*       
-    </form>  */}
+      <div>
+  <h3 className="text-lg font-semibold">Enable Email Notifications</h3>
+  <label className="flex items-center space-x-2">
+    <input
+      type="checkbox"
+      name="notificationChannels"
+      
+      checked={formData.notificationChannels.email} // Check state for "email"
+      onChange={handleChange} // Update state on toggle
+    />
+    <span>Email</span>
+  </label>
+</div>
+
+
    
-  </div>
-</section>
 
       {/* Submit Button */}
       <button

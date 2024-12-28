@@ -14,16 +14,22 @@ export const GlobalStateProvider = ({ children }) => {
   const [preferences, setPreferences] = useState({
     categories: ['Sports', 'Technology', 'Business', 'Entertainment'],
     frequency: 'daily',
-    notificationChannels: ['email'],
-  });
+    notificationChannels: {
+      email: true, 
+  },
+});
 
   const [newsData, setNewsData] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  // const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'))
 
   const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-  const BASE_URL = 'https://newsapi.org/v2/top-headlines';
+  // const BASE_URL = 'https://newsapi.org/v2/top-headlines';
+  const BASE_URL = import.meta.env.VITE_NEWS_API_URL;
+
+
 
   // Function to update user preferences
   const updatePreferences = (newPreferences) => {
@@ -85,14 +91,17 @@ export const GlobalStateProvider = ({ children }) => {
     <GlobalStateContext.Provider
       value={{
         preferences,
+        setPreferences,
         newsData,
         notifications,
         updatePreferences,
         fetchNewsData,
         addNotification,
-        user,
-        setUser,
-        loading, // Expose loading state
+        // user,
+        // setUser,
+        loading, 
+        setNewsData,
+        setLoading,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import React from "react";
 import { NotificationProvider } from "./context/NotificationContext";
-
+import AuthProvider from "./context/AuthContext";
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalStateProvider } from '../src/context/GlobalStateContext'
@@ -13,10 +13,13 @@ import Footer from './components/Footer';
 import './index.css';
 
 
+
 const App = () => {
   return (
+    <NotificationProvider>
+  
     <GlobalStateProvider>
-      <NotificationProvider>
+    <AuthProvider>
         <Router>
           {/* Main Layout */}
           <Navbar />
@@ -25,8 +28,10 @@ const App = () => {
           </div>
           <Footer />
         </Router>
-      </NotificationProvider>
+        </AuthProvider>
     </GlobalStateProvider>
+    
+    </NotificationProvider>
   );
 };
 

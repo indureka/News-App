@@ -13,23 +13,21 @@ const PreferenceSchema = new mongoose.Schema(
       enum: ['light', 'dark'], // Example values
       default: 'light',
     },
-    language: {
-      type: String,
-      default: 'en', // Default language is English
-    },
-    notifications: {
+   
+    notificationChannels: {
       email: {
         type: Boolean,
         default: true, // Email notifications are enabled by default
-      },
-      sms: {
-        type: Boolean,
-        default: false, // SMS notifications are disabled by default
       },
     },
     categories: {
       type: [String], // Array of preferred categories
       default: ['general'], // Default preference is "general"
+    },
+    frequency: {
+      type: String,
+      enum: ['daily', 'hourly', 'immediate'], // Frequency options
+      default: 'daily', // Default frequency is "daily"
     },
   },
   {

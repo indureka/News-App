@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 // Set up your email transporter
@@ -13,7 +14,7 @@ const transporter = nodemailer.createTransport({
   });
   
   // Function to send email
-  const sendEmail = async (to, subject, text) => {
+  const sendEmail = async (to, subject, text, html) => {
 
     if (!to) {
       console.error('No email provided!');
@@ -23,12 +24,14 @@ const transporter = nodemailer.createTransport({
     console.log('Preparing to send email:');
     console.log('Email subject:', subject);
     console.log('Email text:', text);
+    console.log('Email link:', html);
 
     const mailOptions = {
       from: process.env.EMAIL_USER, // sender address
       to: to,                       // recipient's email
       subject: subject,             // subject line
-      text: text                    // email body
+      text: text,
+      html: html                    // email body
     };
   
     try {
@@ -41,6 +44,34 @@ const transporter = nodemailer.createTransport({
       console.error('Error sending email:', error);
     }
   };
+
+
+  // New function for sending the password reset email
+export const sendPasswordResetEmail = async (email, resetLink) => {
+
+  console.log('Preparing to send email with resetLink:', resetLink);
+  
+// Email content
+const subject = 'Password Reset Request';
+const text = `You have requested a password reset. Please click the following link to reset your password:`;
+const html = `<p>You have requested a password reset. Please click the following link to reset your password:</p><a href="${resetLink}">Reset Password</a>`;  // HTML content
+
+
+
+
+  // Use sendEmail function to send the email
+  const result = await sendEmail(email, subject, text, html);
+
+  if (result.success) {
+    console.log('Password reset email sent successfully');
+  } else {
+    console.error('Failed to send password reset email:', result.error);
+  }
+
+  
+
+  return result;
+};
 
   // Main function to send notifications based on user preferences
 export const sendNotification = async (user, message) => {
@@ -56,13 +87,7 @@ export const sendNotification = async (user, message) => {
       await sendEmail(user.email, 'Notification', message);
     }
   
-    // if (user.notificationChannels.includes('sms')) {
-    //   await sendSms(user.phoneNumber, message);
-    // }
   
-    // if (user.notificationChannels.includes('push')) {
-    //   await sendPushNotification(user.deviceToken, message);
-    // }
   };
 
 
@@ -93,9 +118,6 @@ export const sendNotification = async (user, message) => {
   console.log('Relevant updates for user:', relevantUpdates); 
 
 
-    // Filter news updates for user's subscribed categories
-    // const relevantUpdates = newsUpdates.filter(update => user.categories.includes(update.category));
-    // console.log('Relevant updates for user:', relevantUpdates); 
   
     if (relevantUpdates.length === 0) {
       console.log('No relevant news updates for user:');

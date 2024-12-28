@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { sendNewsAlert, sendNotification } from '../utils/sendEmail.js';
+import { sendNewsAlert } from '../utils/sendEmail.js';
 import sendEmail from '../utils/sendEmail.js';
 
 import { processNewsAlerts } from '../controllers/notificationController.js';
@@ -49,26 +49,7 @@ router.post('/send-notification', async (req, res) => {
     }
 });
 
-// router.post('/send-notification', async (req, res) => {
-//     const { message, user } = req.body;
 
-//     console.log('Received notification request:', { message, user });
-  
-//     if (!user || !message) {
-//         console.error('User or message missing in the request body');
-//       return res.status(400).json({ success: false, message: 'User and message are required' });
-//     }
-  
-//     try {
-//         console.log('Received notification request:', { message, user }); // Log incoming data for debugging
-//         await sendNewsAlert(user, message);
-//         console.log('Notification sent successfully');
-//         res.status(200).json({ success: true, message: 'Notification sent successfully' });
-//       } catch (error) {
-//         console.error('Error in sendNotification:', error); // Log the error
-//         res.status(500).json({ success: false, message: 'Error sending notification', error });
-//       }
-//   });
 
 
 // Test connection route

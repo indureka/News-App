@@ -14,6 +14,7 @@ export const generateResetToken = (email) => {
   return resetToken;
 };
 
+
 // Function to verify reset token
 const verifyResetToken = (token) => {
   try {

@@ -2,7 +2,7 @@
 
 // API URL constants (for news API or any other service you use)
 const API_URL = "https://newsapi.org/v2/";
-const NEWS_API_KEY = "8J0GgSVQoKFa42N9E7gqyphAnaVJMTAJZvu9EqhM";
+const NEWS_API_KEY = "";
 
 // Frontend URLs for various pages (useful for redirects or email links)
 const FRONTEND_URL = "http://localhost:5173";

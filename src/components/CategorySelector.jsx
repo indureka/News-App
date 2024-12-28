@@ -13,7 +13,7 @@ const CategorySelector = ({ onCategoryChange }) => {
  // Handle category change (via dropdown or button group)
  const handleCategoryChange = (category) => {
   setSelectedCategory(category);
-  onCategoryChange(category); // Notify the parent component about the selected category
+  onCategoryChange(category); 
 };
   
 

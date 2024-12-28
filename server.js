@@ -1,10 +1,16 @@
 
 import notificationRoutes from './src/server/routes/notificationRoutes.js';
-
+import preferenceRoutes from './src/server/routes/preferenceRoutes.js';
+import newsRoutes from './src/server/routes/newsRoute.js';
+import authRoute from './src/server/routes/authRoute.js';
 import express from 'express';
+import authenticateUser from './src/server/middlewears/authMiddlewear.js';
+import { fetchNewsByCategories } from './src/server/controllers/preferenceController.js';
 
 import cors from 'cors';
-import dotenv, { config } from 'dotenv';
+// import dotenv, { config } from 'dotenv';
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 
@@ -22,7 +28,7 @@ const app = express();
 connectDB(); 
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Set your local dev URL or frontend URL
+  origin: 'http://localhost:5173' || process.env.FRONTEND_URL,// Set your local dev URL or frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
   credentials: true, // Allow credentials if needed
 };
@@ -46,14 +52,25 @@ app.get('/', (req, res) => {
 });
 
 // Define authentication routes (can be extended for other routes)
-
+app.get('/api/user', authenticateUser, (req, res) => {
+  res.json({ id: req.user.id, email: req.user.email, name: req.user.name });
+});
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
 
+app.use('/api/auth',authRoute);
+app.use('/api/preferences', preferenceRoutes);
+
+
+
+app.use('/api', newsRoutes);
+
+
 app.use('/api/notifications', notificationRoutes);
+
 
 
 

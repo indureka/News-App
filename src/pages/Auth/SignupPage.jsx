@@ -1,21 +1,24 @@
 import React, { useState, useContext } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom"; // For redirection after successful signup
 
 
 import { useNotificationContext } from "../../context/NotificationContext";
 import { useGlobalStateContext } from "../../context/GlobalStateContext";
-
+import { useAuthContext } from "../../context/AuthContext";
 
 const SignupPage = () => {
   const { addNotification } = useNotificationContext();
+  
   const { setUser } = useGlobalStateContext();// For storing user globally on successful signup
-  const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { loading, setLoading } = useNotificationContext();
+
+  const { login, setName, setEmail, setPassword, setError, name, email, password, error, handleSignup } = useAuthContext();
+  // const navigate = useNavigate();
+
+  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +26,8 @@ const SignupPage = () => {
     setError("");
 
     try {
-      const response = await fetch("/api/auth/signup", {
+      // const response = await fetch("http://localhost:5000/api/auth/signup", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -35,17 +39,22 @@ const SignupPage = () => {
         throw new Error(data.message || "Signup failed");
       }
 
-      // Set user data globally (AuthContext)
-      setUser(data.user);
+       // Use login from context to set user and token globally
+       handleSignup(data.user, data.token);
 
-      // Store token in localStorage or sessionStorage
-      localStorage.setItem("authToken", data.token);
+     
 
+
+      // Clear form states after successful signup
+      setName("");
+      setEmail("");
+      setPassword("");
+      setLoading(false);
       addNotification("Signup successful", "success");
-      navigate("/home"); // Redirect to home or dashboard page
+      navigate("/login"); // Redirect to home or dashboard page
     } catch (err) {
       setError(err.message);
-      addNotification(err.message, "error");
+      
     } finally {
       setLoading(false);
     }

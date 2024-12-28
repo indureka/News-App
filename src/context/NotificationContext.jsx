@@ -18,7 +18,9 @@ export const NotificationProvider = ({ children }) => {
   const [preferences, setPreferences] = useState({
     categories: ["Sports", "Technology"],
     frequency: "daily",
-    notificationChannels: ["email"],
+    notificationChannels: {
+      email: true, 
+  },
   });
 
 
@@ -79,6 +81,7 @@ export const NotificationProvider = ({ children }) => {
     <NotificationContext.Provider
       value={{
         preferences,
+        setPreferences,
         updatePreferences,
         notifications,
         addNotification,

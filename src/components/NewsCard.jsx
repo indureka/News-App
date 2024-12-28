@@ -1,7 +1,7 @@
 import React from "react";
 
 const NewsCard = ({ title, image, description, link }) => {  // Default empty string for description
-  
+  console.log(image, "Image URL passed to NewsCard");
    // Check if any of the required properties are null or undefined
    if (!title || !link) {
     return null; // If any of the essential props are missing, don't render the card
@@ -11,8 +11,11 @@ const NewsCard = ({ title, image, description, link }) => {  // Default empty st
     <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Image */}
       {image ? (
+
+
         <img
-          src={image}
+      
+          src={image ? encodeURI(image) : '/placeholder-image.jpg'}
           alt={title}
           className="w-full h-48 object-cover"
         />

@@ -9,7 +9,8 @@ const NewsAlertForm = () => {
   const [message, setMessage] = useState("");
 
   const newsApiKey = import.meta.env.VITE_NEWS_API_KEY; // Get the API key from the .env file
-  const newsApiBaseUrl = "https://newsapi.org/v2/top-headlines";
+  // const newsApiBaseUrl = "https://newsapi.org/v2/top-headlines";
+  const newsApiBaseUrl = import.meta.env.VITE_NEWS_API_URL;
 
   // Fetch news updates based on selected categories
   const fetchNewsUpdates = async () => {
@@ -53,7 +54,11 @@ const NewsAlertForm = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/notifications/news-alerts", {
+      // const response = await axios.post("http://localhost:5000/api/notifications/news-alerts", {
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/notifications/news-alerts`,
+        {
         user: {
           email,
           categories, // The categories the user is subscribed to
