@@ -61,6 +61,60 @@ export const getAllNews = async (req, res) => {
 };
 
 
+// export const fetchByCategory = async (category) => {
+//   const newsAPIKey = process.env.NEWS_API_KEY; // Store your API key in an env file
+//   const articles = [];
+
+//   try {
+//     // Fetch news articles for the selected category
+//     // const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+//       const response = await axios.get(`${process.env.NEWS_API_URL}`, {
+//       params: {
+//         category,
+//         apiKey: newsAPIKey,
+//         pageSize: 9, // Limit articles per category
+//       },
+//     });
+// console.log("newsdata fetched from backend");
+//     // Check if the response contains articles
+//     if (response.data.articles) {
+//       // Iterate over articles and save to database if they are not already present
+//       for (const article of response.data.articles) {
+//         const { title, description, url, source, urlToImage, publishedAt } = article;
+
+//         // Check if article already exists in the database (to prevent duplicates)
+//         let existingArticle = await News.findOne({ title });
+//         if (!existingArticle) {
+//           const newArticle = new News({
+//             title,
+//             description,
+//             url,
+//             source: source.name,
+//             image: urlToImage,
+//             publishedAt,
+//             category,
+//           });
+//           console.log('Article Image URL:', urlToImage);
+
+//           // Save the article to the database
+//           await newArticle.save();
+//           articles.push(newArticle);
+//         } else {
+//           // If the article already exists, just add it to the list
+//           articles.push(existingArticle);
+//           console.log('Article already exists in the database:', title);
+//         }
+//       }
+//     }
+
+
+//     return articles; // Return the list of articles
+//   } catch (error) {
+//     console.error('Error fetching news:', error.message);
+//     return [];
+//   }
+// };
+
 export const fetchByCategory = async (category) => {
   const newsAPIKey = process.env.NEWS_API_KEY; // Store your API key in an env file
   const articles = [];
@@ -71,7 +125,7 @@ export const fetchByCategory = async (category) => {
       const response = await axios.get(`${process.env.NEWS_API_URL}`, {
       params: {
         category,
-        apiKey: newsAPIKey,
+        apikey: newsAPIKey,
         pageSize: 9, // Limit articles per category
       },
     });
@@ -80,7 +134,10 @@ console.log("newsdata fetched from backend");
     if (response.data.articles) {
       // Iterate over articles and save to database if they are not already present
       for (const article of response.data.articles) {
-        const { title, description, url, source, urlToImage, publishedAt } = article;
+        const { title, description, url, source, image, publishedAt } = article;
+
+        // const image = urlToImage || 'https://default-image-url.com/default-image.jpg';
+        const articleImage = image || 'https://default-image-url.com/default-image.jpg';
 
         // Check if article already exists in the database (to prevent duplicates)
         let existingArticle = await News.findOne({ title });
@@ -90,11 +147,14 @@ console.log("newsdata fetched from backend");
             description,
             url,
             source: source.name,
-            image: urlToImage,
+            image: articleImage,
             publishedAt,
             category,
           });
-          console.log('Article Image URL:', urlToImage);
+          console.log('Full Article Object:', article);
+          // console.log('Article Image URL:', article.urlToImage);
+          // console.log('Article Image URL:', urlToImage || 'No image available');
+          console.log('Article Image URL:', articleImage);
 
           // Save the article to the database
           await newArticle.save();
