@@ -103,7 +103,7 @@ export const updatePreference = async (req, res) => {
       Hello ${CurrentUser.name},<br>
       You have successfully subscribed to the following categories: ${categories.join(', ')}.<br><br>
       If you'd like to unsubscribe from these updates, please click the button below:<br><br>
-      <a href="${process.env.FRONTEND_URL}/unsubscribe/${userId}?token=${unsubscribeToken}" 
+      <a href="${process.env.FRONTEND_URL}unsubscribe/${userId}?token=${unsubscribeToken}" 
          target="_blank" 
          style="background-color: #f44336; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
         Unsubscribe
