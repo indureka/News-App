@@ -35,12 +35,22 @@ connectDB();
 
 const corsOptions = {
   origin: [
-    'http://localhost:5173', // Local frontend for development
-    'https://676fcaf7c3164c5f26a04c51--nimble-puppy-db4fdc.netlify.app' // Deployed frontend
+    'https://nimble-puppy-db4fdc.netlify.app/', // Deployed frontend
+    'http://localhost:5173' // Local frontend for development
+    
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
   credentials: true, // Allow credentials if needed
 };
+
+// const corsOptions = {
+//   origin: [
+//     'http://localhost:5173', // Local frontend for development
+//     'https://676fcaf7c3164c5f26a04c51--nimble-puppy-db4fdc.netlify.app' // Deployed frontend
+//   ],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+//   credentials: true, // Allow credentials if needed
+// };
 
 
 
