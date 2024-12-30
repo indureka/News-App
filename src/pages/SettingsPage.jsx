@@ -15,6 +15,7 @@ const SettingsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedName, setUpdatedName] = useState("");
   const [updatedPassword, setUpdatedPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState(''); 
   const navigate = useNavigate();
 
   // Fetch user details on page load
@@ -57,8 +58,9 @@ const SettingsPage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      alert(response.data.message); // Notify user of success
+      if (response.data.message === "User details updated successfully") {
+      // alert(response.data.message); // Notify user of success
+      setSuccessMessage('Preferences updated successfully!');
       setUserDetails({
         ...userDetails,
         name: response.data.user.name,
@@ -67,6 +69,10 @@ const SettingsPage = () => {
 
      
       addNotification("Account details updated", "success");
+    } else {
+      console.error('Error in response:', response.data);
+    }
+    
     } catch (error) {
       console.error("Error updating user details:", error);
       // alert("Failed to update user details.");
@@ -155,6 +161,11 @@ const SettingsPage = () => {
         </button>
       )}
     </div>
+    {successMessage && (
+      <div className="mt-4 text-green-600 font-medium text-center">
+        {successMessage}
+      </div>
+    )}
   </div>
   
 </div>
