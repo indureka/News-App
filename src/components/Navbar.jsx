@@ -16,7 +16,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('AuthContext:', { user, handlelogin, handlelogout });
+  // console.log('AuthContext:', { user, handlelogin, handlelogout });
 
   // const logout = () => {
   //   setUser(null);

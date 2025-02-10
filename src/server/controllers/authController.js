@@ -19,8 +19,8 @@ const generateResetToken = (email) => {
 const login = async (req, res) => {
   console.log('Inside login controller');
   const { email, password } = req.body;
-  console.log('Email:', email);
-  console.log('Password:', password);
+  // console.log('Email:', email);
+  // console.log('Password:', password);
 
   if (!validateEmail(email)) {
     console.log('Invalid email format');
@@ -35,7 +35,7 @@ const login = async (req, res) => {
   try {
     // Use .select('+password') to include password in the query
     const user = await User.findOne({ email }).select('+password');
-    console.log('User:', user);
+    // console.log('User:', user);
 
     if (!user) {
       console.log('Invalid email');
@@ -45,17 +45,17 @@ const login = async (req, res) => {
       console.log('Invalid email or password');
       return res.status(400).json({ message: 'Invalid password' });
     }
-    console.log('Password received:', password);
+    // console.log('Password received:', password);
 
 
 
      // Log the stored hash and entered password in hex format
      const storedHashBuffer = Buffer.from(user.password, 'utf8');
-     console.log('Stored Hash Buffer:', storedHashBuffer.toString('hex'));
-     console.log('Entered Password Buffer:', Buffer.from(password, 'utf8').toString('hex'));
+    //  console.log('Stored Hash Buffer:', storedHashBuffer.toString('hex'));
+    //  console.log('Entered Password Buffer:', Buffer.from(password, 'utf8').toString('hex'));
 
     const isMatch = await user.matchPassword(password);
-    console.log('Password match:', isMatch);
+    // console.log('Password match:', isMatch);
 
 
     if (!isMatch) {
@@ -64,7 +64,7 @@ const login = async (req, res) => {
     }
 
     const token = user.generateAuthToken();
-    console.log('Generated token:', token);
+    // console.log('Generated token:', token);
 
     res.status(200).json({
       user: {
@@ -186,7 +186,7 @@ const signup = async (req, res) => {
 
 // request password reset
 const requestPasswordReset = async (req, res) => {
-  console.log('Request body:', req.body); // Log incoming request body
+  // console.log('Request body:', req.body); // Log incoming request body
   const { email } = req.body;
 
   // Validate the email format
@@ -198,7 +198,7 @@ const requestPasswordReset = async (req, res) => {
   try {
     // Generate the reset token
     const resetToken = generateResetToken(email);
-    console.log(resetToken);
+    // console.log(resetToken);
 
     // Create the reset link
     const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
@@ -260,7 +260,7 @@ const resetPassword = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const { email } = decoded;
 
-    console.log('Decoded Token:', decoded);
+    // console.log('Decoded Token:', decoded);
 
     // Find the user by email
     const user = await User.findOne({ email });
@@ -269,21 +269,21 @@ const resetPassword = async (req, res) => {
     }
 
      // Log the password before hashing
-     console.log('New password before hashing:', newPassword);
+    //  console.log('New password before hashing:', newPassword);
 
     // Hash the new password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
-    console.log('Hashed password:', hashedPassword);
+    // console.log('Hashed password:', hashedPassword);
 
     // Update the user's password
     user.password = hashedPassword;
-    console.log('User before saving:', user);
+    // console.log('User before saving:', user);
    try {
   const updatedUser = await user.save();
-  console.log('User saved successfully:', updatedUser);
+  // console.log('User saved successfully:', updatedUser);
 } catch (error) {
-  console.error('Error saving user:', error);
+  // console.error('Error saving user:', error);
 }
 
     res.status(200).json({ message: 'Password reset successful. You can now log in.' });

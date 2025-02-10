@@ -55,8 +55,8 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   }
 
   try {
-    console.log("Entered password:", enteredPassword);
-    console.log("Stored hash:", this.password); // Log the stored hash
+    // console.log("Entered password:", enteredPassword);
+    // console.log("Stored hash:", this.password); // Log the stored hash
     return await bcrypt.compare(enteredPassword, this.password); // Compare entered password with the hashed password
   } catch (error) {
     console.error('Error while comparing passwords:', error);

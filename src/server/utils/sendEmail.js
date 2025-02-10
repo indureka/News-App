@@ -37,8 +37,8 @@ const transporter = nodemailer.createTransport({
     try {
     //   await transporter.sendMail(mailOptions);
     const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent: ' + info.response);
-    //   console.log('Email sent successfully');
+      // console.log('Email sent: ' + info.response);
+      console.log('Email sent successfully');
       return { success: true }; 
     } catch (error) {
       console.error('Error sending email:', error);
@@ -49,7 +49,7 @@ const transporter = nodemailer.createTransport({
   // New function for sending the password reset email
 export const sendPasswordResetEmail = async (email, resetLink) => {
 
-  console.log('Preparing to send email with resetLink:', resetLink);
+  // console.log('Preparing to send email with resetLink:', resetLink);
   
 // Email content
 const subject = 'Password Reset Request';
@@ -75,13 +75,13 @@ const html = `<p>You have requested a password reset. Please click the following
 
   // Main function to send notifications based on user preferences
 export const sendNotification = async (user, message) => {
-  console.log('Sending notification to user:', user);
+  // console.log('Sending notification to user:', user);
 
   if (!user.email) {
     console.error('Error: No email provided!');
     return { success: false, error: 'No email provided' };
   }
-    console.log('Sending notification to user:', user);
+    // console.log('Sending notification to user:', user);
     if (user.notificationChannels.includes('email')) {
         console.log('Email channel selected, sending email...');
       await sendEmail(user.email, 'Notification', message);
@@ -94,11 +94,11 @@ export const sendNotification = async (user, message) => {
   
 
   export const sendNewsAlert = async (user, newsUpdates) => {
-    console.log('Sending news alert to user:', user);
+    // console.log('Sending news alert to user:', user);
 
     console.log('sendNewsAlert called with:', { user, newsUpdates });
     if (!user || !user.email) {
-      console.error('Error: No email provided for user:', user);
+      // console.error('Error: No email provided for user:', user);
       return { success: false, error: 'No email provided' };
     }
 
@@ -112,7 +112,7 @@ export const sendNotification = async (user, message) => {
     
   // Filter news updates for user's subscribed categories
   const relevantUpdates = newsUpdates.filter(update => {
-    console.log(`Checking if ${update.category} is in ${user.categories}`);
+    // console.log(`Checking if ${update.category} is in ${user.categories}`);
     return user.categories.includes(update.category);
   });
   console.log('Relevant updates for user:', relevantUpdates); 

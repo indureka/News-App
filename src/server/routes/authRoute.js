@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/login', (req, res, next) => {
   console.log('Login route hit');
-  console.log('Request body:', req.body);
+  // console.log('Request body:', req.body);
   next(); // Pass to controller
 }, login);
 

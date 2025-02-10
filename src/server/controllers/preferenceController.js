@@ -11,7 +11,7 @@ export const fetchNewsByCategories = async (categories) => {
   const newsAPIKey = process.env.NEWS_API_KEY;
   const articles = [];
 
-  console.log('News API Key:', process.env.NEWS_API_KEY); 
+  // console.log('News API Key:', process.env.NEWS_API_KEY); 
   try {
     // Batch fetch news articles for categories
     const requests = categories.map((category) =>
@@ -65,7 +65,7 @@ export const updatePreference = async (req, res) => {
       return res.status(404).json({ error: 'User not found.' });
     }
 
-    console.log('User found:', CurrentUser);
+    // console.log('User found:', CurrentUser);
 
     // Fetch the existing preferences or create a new one
     let preference = await Preference.findOne({ user: userId });
@@ -93,7 +93,7 @@ export const updatePreference = async (req, res) => {
 
     // Save the preference document
     await preference.save();
-    console.log('Updated Preference:', preference);
+    // console.log('Updated Preference:', preference);
 
     // Generate the unsubscribe token
     const unsubscribeToken = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -188,7 +188,7 @@ export const getNewsAlerts = async (req, res) => {
     if (notificationChannels && notificationChannels.email) {
       // Use your sendEmail function to send the email
       await sendEmail(preference.user.email, emailSubject, emailContent);
-      console.log(`Email sent to ${preference.user.email}`);
+      // console.log(`Email sent to ${preference.user.email}`);
     }
 
     res.status(200).json({
@@ -207,13 +207,13 @@ export const getNewsAlerts = async (req, res) => {
 export const unsubscribe =  async (req, res) => {
   const { userId } = req.params;
   const { token } = req.query;
-  console.log(`Unsubscribe request for userId: ${userId}, token: ${token}`);
+  // console.log(`Unsubscribe request for userId: ${userId}, token: ${token}`);
 
   try {
     // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    console.log('Decoded token:', decoded); 
+    // console.log('Decoded token:', decoded); 
 
     if (decoded.userId !== userId) {
       console.log('Token mismatch: expected userId does not match decoded userId');
@@ -225,7 +225,7 @@ export const unsubscribe =  async (req, res) => {
     console.log('Fetched preference:', preference);  
 
     if (!preference) {
-      console.log('No preferences found for userId:', userId);
+      // console.log('No preferences found for userId:', userId);
       return res.status(404).json({ error: 'Preferences not found' });
      
     }

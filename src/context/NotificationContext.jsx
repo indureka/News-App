@@ -45,14 +45,14 @@ export const NotificationProvider = ({ children }) => {
 
 
   const addNotification = (message, type) => {
-    console.log('Before setNotifications, notifications:', notifications);
-    console.log('Notifications Array:', notifications);  // Log the notifications before adding
+    // console.log('Before setNotifications, notifications:', notifications);
+    // console.log('Notifications Array:', notifications);  // Log the notifications before adding
     setNotifications((prevNotifications) => {
       const updatedNotifications = [
         ...prevNotifications,
         { id: Date.now(), message, type }
       ];
-      console.log('Updated Notifications:', updatedNotifications);  // Log updated notifications
+      // console.log('Updated Notifications:', updatedNotifications);  // Log updated notifications
       return updatedNotifications;
     });
   };

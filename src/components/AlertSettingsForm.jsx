@@ -51,7 +51,7 @@ const AlertSettingsForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Submitted:', formData);
+    // console.log('Form Submitted:', formData);
 
     const updatedFields = [];
 
@@ -65,7 +65,7 @@ const AlertSettingsForm = () => {
 
     if (updatedFields.length > 0) {
       const message = updatedFields.join(', ');
-      console.log('Calling addNotification with message:', message);
+      // console.log('Calling addNotification with message:', message);
       addNotification(message, 'success');
 
     

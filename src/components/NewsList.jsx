@@ -21,7 +21,7 @@ const NewsList = ({ category }) => {
         );
 
         setNewsArticles(response.data);
-        console.log(newsArticles, "Fetched news articles in NewsList");
+        // console.log(newsArticles, "Fetched news articles in NewsList");
       } catch (err) {
         setError(err.message || "An error occurred while fetching news.");
       } finally {

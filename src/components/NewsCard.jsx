@@ -1,7 +1,7 @@
 import React from "react";
 
 const NewsCard = ({ title, image, description, link }) => {  // Default empty string for description
-  console.log(image, "Image URL passed to NewsCard");
+  // console.log(image, "Image URL passed to NewsCard");
    // Check if any of the required properties are null or undefined
    if (!title || !link) {
     return null; // If any of the essential props are missing, don't render the card

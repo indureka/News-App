@@ -12,7 +12,7 @@ const LoginPage = () => {
   const { login, forgotPassword, setForgotPassword, resetEmail, setResetEmail, handleForgotPassword  } = useAuthContext();
   const navigate = useNavigate();
 
-  console.log("Auth Context Data:", {forgotPassword, setForgotPassword, resetEmail, setResetEmail, handleForgotPassword});
+  // console.log("Auth Context Data:", {forgotPassword, setForgotPassword, resetEmail, setResetEmail, handleForgotPassword});
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
