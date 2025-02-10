@@ -64,9 +64,9 @@ const LoginPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">
+    <div className="min-h-screen bg-white flex items-center justify-center p-6">
+      <div className="w-full max-w-md bg-white p-8 rounded-none shadow-md">
+        <h2 className="text-2xl font-normal text-center mb-6">
         {forgotPassword ? "Forgot Password" : "Login"}
         </h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -76,22 +76,22 @@ const LoginPage = () => {
         {!forgotPassword ? (
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email</label>
+              <label htmlFor="email" className="block text-sm font-normal text-gray-700">Email</label>
               <input
                 type="email"
                 id="email"
-                className="w-full p-3 mt-1 border rounded-md"
+                className="w-full p-3 mt-1 border rounded-none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="mb-6">
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-700">Password</label>
+              <label htmlFor="password" className="block text-sm font-normal text-gray-700">Password</label>
               <input
                 type="password"
                 id="password"
-                className="w-full p-3 mt-1 border rounded-md"
+                className="w-full p-3 mt-1 border rounded-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -99,7 +99,7 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
-              className={`w-full py-3 bg-blue-500 text-white font-semibold rounded-md ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+              className={`w-full py-3 bg-red-800 text-white font-normal rounded-none ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
@@ -109,7 +109,7 @@ const LoginPage = () => {
                 type="button"
                 onClick={() => setForgotPassword(true)}
                 
-                className="text-sm text-blue-500"
+                className="text-sm text-red-800"
               >
                 Forgot password?
               </button>
@@ -119,7 +119,7 @@ const LoginPage = () => {
                 <button
                   type="button"
                   onClick={() => navigate("/signup")} // Navigate to Signup page
-                  className="text-sm text-blue-500"
+                  className="text-sm text-red-800"
                 >
                   Sign up
                 </button>
@@ -131,11 +131,11 @@ const LoginPage = () => {
           // Forgot Password Form
           <form onSubmit={handleForgotPassword}>
             <div className="mb-4">
-              <label htmlFor="resetEmail" className="block text-sm font-semibold text-gray-700">Enter your email</label>
+              <label htmlFor="resetEmail" className="block text-sm font-normal text-gray-700">Enter your email</label>
               <input
                 type="email"
                 id="resetEmail"
-                className="w-full p-3 mt-1 border rounded-md"
+                className="w-full p-3 mt-1 border rounded-none"
                 value={resetEmail}
                 onChange={(e) => setResetEmail(e.target.value)}
                 required
@@ -143,7 +143,7 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
-              className={`w-full py-3 bg-blue-500 text-white font-semibold rounded-md ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+              className={`w-full py-3 bg-red-800 text-white font-normal rounded-none ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={loading}
             >
               {loading ? "Sending email..." : "Send Reset Link"}
@@ -152,7 +152,7 @@ const LoginPage = () => {
               <button
                 type="button"
                 onClick={() => setForgotPassword(false)}
-                className="text-sm text-blue-500"
+                className="text-sm text-red-800"
               >
                 Back to login
               </button>

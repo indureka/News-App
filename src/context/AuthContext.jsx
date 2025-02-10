@@ -10,7 +10,7 @@ export const useAuthContext = () => {
 
 const AuthProvider = ({ children }) => {
 
-  const { addNotification } = useNotificationContext();
+  const { addNotification, setNotifications } = useNotificationContext();
     const { loading, setLoading } = useGlobalStateContext();
 
 

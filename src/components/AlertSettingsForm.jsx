@@ -136,7 +136,7 @@ if (response.data.message === "Preferences updated successfully.") {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Categories */}
       <div>
-        <h3 className="text-lg font-semibold">Select Categories</h3>
+        <h3 className="text-lg font-normal">Select Categories</h3>
         <div className="flex flex-wrap gap-4">
           {["Sports", "Technology", "Business", "Entertainment"].map(
             (category) => (
@@ -147,6 +147,7 @@ if (response.data.message === "Preferences updated successfully.") {
                   value={category}
                   checked={formData.categories.includes(category)}
                   onChange={handleChange}
+                  className="form-checkbox h-4 w-4 text-red-600 focus:ring-0 accent-red-700"
                 />
                 <span>{category}</span>
               </label>
@@ -157,12 +158,19 @@ if (response.data.message === "Preferences updated successfully.") {
 
       {/* Frequency */}
       <div>
-        <h3 className="text-lg font-semibold">Notification Frequency</h3>
+        <h3 className="text-lg font-normal">Notification Frequency</h3>
         <select
           name="frequency"
           value={formData.frequency}
           onChange={handleChange}
-          className="p-2 border rounded-md"
+          className="p-2 border border-red-800 rounded-none appearance-none bg-white focus:outline-none focus:border-red-800 pr-8"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd' /%3E%3C/svg%3E")`,
+            backgroundPosition: 'right 0.5rem center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '1.5em 1.5em',
+          }}
+        
         >
           <option value="immediate">Immediate</option>
           <option value="hourly">Hourly</option>
@@ -173,7 +181,7 @@ if (response.data.message === "Preferences updated successfully.") {
       {/* Notification Channels */}
 
       <div>
-  <h3 className="text-lg font-semibold">Enable Email Notifications</h3>
+  <h3 className="text-lg font-normal">Enable Email Notifications</h3>
   <label className="flex items-center space-x-2">
     <input
       type="checkbox"
@@ -181,6 +189,7 @@ if (response.data.message === "Preferences updated successfully.") {
       
       checked={formData.notificationChannels.email} // Check state for "email"
       onChange={handleChange} // Update state on toggle
+       className="form-checkbox h-4 w-4 text-red-600 focus:ring-0 accent-red-700"
     />
     <span>Email</span>
   </label>
@@ -192,7 +201,7 @@ if (response.data.message === "Preferences updated successfully.") {
       {/* Submit Button */}
       <button
         type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+        className="px-4 py-2 font-normal bg-red-800 hover:bg-red-900 text-white rounded-none"
       >
         Save Preferences
       </button>

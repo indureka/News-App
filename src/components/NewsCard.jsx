@@ -8,7 +8,7 @@ const NewsCard = ({ title, image, description, link }) => {  // Default empty st
   }
   
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white shadow-md rounded-none overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Image */}
       {image ? (
 
@@ -28,7 +28,7 @@ const NewsCard = ({ title, image, description, link }) => {  // Default empty st
       {/* Content */}
       <div className="p-4">
         {/* Title */}
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">
+        <h2 className="text-lg font-normal text-gray-800 mb-2">
           {title}
         </h2>
 
@@ -44,7 +44,7 @@ const NewsCard = ({ title, image, description, link }) => {  // Default empty st
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
+          className="text-red-800 hover:underline"
         >
           Read more
         </a>

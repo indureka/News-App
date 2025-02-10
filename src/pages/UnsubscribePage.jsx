@@ -53,9 +53,9 @@ const UnsubscribePage = () => {
   }, [userId, searchParams]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-xl font-bold text-center mb-4">Unsubscribe</h2>
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="max-w-md w-full bg-white shadow-md rounded-none p-6">
+        <h2 className="text-xl font-normal text-center mb-4">Unsubscribe</h2>
         {loading ? (
           <p className="text-center text-gray-600">Processing your request...</p>
         ) : (
@@ -66,7 +66,7 @@ const UnsubscribePage = () => {
         {!loading && (
           <div className="text-center mt-4">
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded-md"
+              className="bg-red-800 text-white py-2 px-4 rounded-none"
               onClick={() => navigate("/")} // Redirect to homepage or another page
             >
               Go Back to Home

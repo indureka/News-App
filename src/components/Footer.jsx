@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6">
+    <footer className="bg-red-800 text-white py-6">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* About Section */}
         <div>
           <h3 className="text-lg font-semibold mb-2">About NewsApp</h3>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-200">
             Stay updated with the latest news from around the world. Customize
             your preferences and get real-time updates directly to your inbox.
           </p>
@@ -16,15 +16,15 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
-          <ul className="text-sm text-gray-400 space-y-2">
+          <h3 className="text-lg font-normal mb-2">Quick Links</h3>
+          <ul className="text-sm text-gray-200 space-y-2">
             <li>
-              <Link to="/" className="hover:text-white">
+              <Link to="/" className="text-white hover:underline font-normal">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/dashboard" className="hover:text-white">
+              <Link to="/dashboard" className="text-white hover:underline font-normal">
                 Dashboard
               </Link>
             </li>
@@ -34,13 +34,13 @@ const Footer = () => {
 
         {/* Social Media Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+          <h3 className="text-lg font-normal mb-2">Follow Us</h3>
           <div className="flex space-x-4">
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-200 hover:text-white"
               aria-label="Facebook"
             >
               <svg
@@ -56,7 +56,7 @@ const Footer = () => {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-200 hover:text-white"
               aria-label="Twitter"
             >
               <svg
@@ -72,7 +72,7 @@ const Footer = () => {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white"
+              className="text-gray-200 hover:text-white"
               aria-label="Instagram"
             >
               <svg
@@ -90,7 +90,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
-      <div className="text-center text-sm text-gray-400 mt-4">
+      <div className="text-center text-sm text-white mt-4">
         &copy; {new Date().getFullYear()} NewsApp. All rights reserved.
       </div>
     </footer>

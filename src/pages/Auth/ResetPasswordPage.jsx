@@ -43,20 +43,20 @@ const { loading, setLoading } = useGlobalStateContext();
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Reset Your Password</h2>
+    <div className="min-h-screen bg-white flex items-center justify-center p-6">
+      <div className="w-full max-w-md bg-white p-8 rounded-none shadow-md">
+        <h2 className="text-2xl font-normal text-center mb-6">Reset Your Password</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="newPassword" className="block text-sm font-semibold text-gray-700">
+            <label htmlFor="newPassword" className="block text-sm font-normal text-gray-700">
               New Password
             </label>
             <input
               type="password"
               id="newPassword"
-              className="w-full p-3 mt-1 border rounded-md"
+              className="w-full p-3 mt-1 border rounded-none"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
@@ -64,7 +64,7 @@ const { loading, setLoading } = useGlobalStateContext();
           </div>
           <button
             type="submit"
-            className={`w-full py-3 bg-blue-500 text-white font-semibold rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`w-full py-3 bg-red-800 text-white font-none rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={loading}
           >
             {loading ? 'Resetting...' : 'Reset Password'}
@@ -74,7 +74,7 @@ const { loading, setLoading } = useGlobalStateContext();
         <div className="text-center mt-4">
           <button
             onClick={() => navigate('/login')}  // Navigate back to login page
-            className="text-sm text-blue-500"
+            className="text-sm text-red-800"
           >
             Back to Login
           </button>

@@ -31,19 +31,19 @@ const HomePage = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-white p-6">
       {/* Header */}
       <header className="mb-8">
-  <h1 className="text-5xl font-extrabold text-center text-gray-800">
-    Discover the Latest Updates with News App
+  <h1 className="text-5xl font-normal text-center text-gray-900">
+    Discover the Latest Updates with NewsTech!
   </h1>
   <div className="flex justify-center items-center mt-4">
-    <p className="text-lg text-gray-600 mr-4">
+    <p className="text-lg font-normal text-gray-600 mr-4">
       Subscribe to your favorite categories and stay updated instantly!
     </p>
     <button
       onClick={handleSubscribeClick}
-      className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors"
+      className="px-6 py-2 bg-red-800 text-white font-normal rounded-none hover:bg-red-900 transition-colors"
     >
       Subscribe Now
     </button>

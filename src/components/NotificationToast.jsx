@@ -23,7 +23,7 @@ const NotificationToast = () => {
           <p>{notification.message}</p>
           {/* Remove button */}
           <button
-              className="bg-white border border-red-600 text-red p-2 hover:bg-red-600 hover:text-white"
+              className="bg-white border border-red-800 text-red p-2 hover:bg-red-900 hover:text-white"
               onClick={() => removeNotification(notification.id)}
             >
               X

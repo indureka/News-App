@@ -32,22 +32,22 @@ const DashboardPage = () => {
   
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-white p-6">
       
 
       {/* Alert Settings Form */}
       <section id="alert-form" className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-2xl font-normal mb-4">
           Manage Notification Preferences
         </h2>
-        <div className="bg-white p-6 shadow-lg rounded-lg">
+        <div className="bg-white p-6 shadow-lg rounded-none">
           <AlertSettingsForm
             // preferences={preferences}
             // onSubmit={handlePreferencesSubmit}
           />
           {submitStatus && (
             <div
-              className={`mt-4 p-4 rounded-md ${
+              className={`mt-4 p-4 rounded-none ${
                 submitStatus.success ? "bg-green-500" : "bg-red-500"
               } text-white`}
             >

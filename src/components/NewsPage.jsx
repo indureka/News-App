@@ -8,16 +8,16 @@ const NewsPage = () => {
 
   return (
     <div>
-      <h1 className="text-center text-2xl font-bold mb-4">News</h1>
-      <div className="flex justify-center space-x-4 mb-6">
+
+      <div className="flex justify-center mb-6 border-y border-red-800">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded ${
+            className={`px-4 py-2 rounded-none ${
               selectedCategory === category
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-800"
+                ? "bg-red-800 text-white"
+                : "bg-white text-red-800"
             }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}

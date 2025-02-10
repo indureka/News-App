@@ -12,8 +12,8 @@ const NotificationPage = () => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-semibold mb-4">Notification History</h2>
-      <div className="bg-white p-6 shadow-lg rounded-lg">
+      <h2 className="text-2xl font-normal mb-4 px-8">Notification History</h2>
+      <div className="bg-white p-6 shadow-lg rounded-none">
         {loading ? (
           <Loader /> // Show loader while loading
         ) : notifications.length === 0 ? (
