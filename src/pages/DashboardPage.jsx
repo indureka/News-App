@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNotificationContext } from "../context/NotificationContext.jsx";
 import AlertSettingsForm from "../components/AlertSettingsForm.jsx";
 
-
-
 const DashboardPage = () => {
   const {
     preferences,
