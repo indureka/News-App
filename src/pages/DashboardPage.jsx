@@ -24,11 +24,6 @@ const DashboardPage = () => {
     setLoading(false);
   }, [setLoading]);
 
- 
-
-
-  
-
   return (
     <div className="min-h-screen bg-white p-6">
       
