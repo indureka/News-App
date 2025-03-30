@@ -18,7 +18,6 @@ const NewsAlertForm = () => {
       setNewsUpdates([]); // No categories selected, clear news updates
       return;
     }
-
     setLoading(true);
     try {
       const categoryParams = categories.join(",");
